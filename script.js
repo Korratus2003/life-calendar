@@ -1,5 +1,4 @@
 const squaresContainer = document.getElementById("squares-container");
-const birthdateForm = document.getElementById("birthdate-form");
 
 function createSquares(livedWeeks) {
   squaresContainer.innerHTML = "";
@@ -24,7 +23,7 @@ function handleBirthdateChange(event) {
   const livedWeeks = Math.round((currentDate - birthdate) / (7 * 24 * 60 * 60 * 1000));
 
   createSquares(livedWeeks);
-  birthdateForm.style.display = "none";
+  document.getElementById("birthdate-form").style.display = "none";
 }
 
 document.querySelector("input[type='date']").addEventListener("change", handleBirthdateChange);
