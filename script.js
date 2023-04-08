@@ -1,4 +1,5 @@
 const squaresContainer = document.getElementById("squares-container");
+const birthdateForm = document.getElementById("birthdate-form");
 
 function createSquares(livedWeeks) {
   squaresContainer.innerHTML = "";
@@ -16,13 +17,14 @@ function createSquares(livedWeeks) {
   }
 }
 
-document.querySelector("form").addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const birthdate = new Date(event.target.elements.birthdate.value);
+function handleBirthdateChange(event) {
+  const birthdate = new Date(event.target.value);
   const currentDate = new Date();
   const totalWeeks = 5200; // 100 years * 52 weeks per year
   const livedWeeks = Math.round((currentDate - birthdate) / (7 * 24 * 60 * 60 * 1000));
 
   createSquares(livedWeeks);
-});
+  birthdateForm.style.display = "none";
+}
+
+document.querySelector("input[type='date']").addEventListener("change", handleBirthdateChange);
