@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kwadraty życia</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Kwadraciki życia</title>
+	<style>
+		.square {
+			width: 10px;
+			height: 10px;
+			margin: 2px;
+			display: inline-block;
+			border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
-	<div class="container">
-		<h1>Kwadraty życia</h1>
-		<form id="birthdate-form">
-			<label for="birthdate">Podaj swoją datę urodzenia:</label>
-			<input type="date" id="birthdate" required>
-		</form>
-		<div id="squares-container"></div>
-	</div>
-	<script src="script.js"></script>
+	<h1>Kwadraciki życia</h1>
+	<form id="form">
+		<label for="birthdate">Podaj datę urodzenia:</label>
+		<input type="date" id="birthdate">
+		<button type="button" onclick="showSquares()">Zobacz kwadraty</button>
+	</form>
+	<div id="squares"></div>
+	<script>
+		function showSquares() {
+			// pobieramy datę urodzenia
+			var birthdate = new Date(document.getElementById("birthdate").value);
+			// obliczamy wiek w tygodniach
+			var ageInWeeks = Math.floor((new Date() - birthdate) / (1000 * 60 * 60 * 24 * 7));
+			// obliczamy liczbę tygodni w życiu
+			var totalWeeks = 100 * 52;
+			// ukrywamy formularz
+			var form = document.getElementById("form");
+			form.style.display = "none";
+			// wyświetlamy kwadraty
+			var squaresDiv = document.getElementById("squares");
+			squaresDiv.innerHTML = "<h2>Kwadraty życia</h2>";
+			for (var i = 0; i < totalWeeks; i++) {
+				var square = document.createElement("div");
+				square.className = "square";
+				if (i < ageInWeeks) {
+					square.style.backgroundColor = "black";
+				}
+				squaresDiv.appendChild(square);
+			}
+		}
+	</script>
 </body>
 </html>
