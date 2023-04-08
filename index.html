@@ -5,10 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1>Kwadraty życia</h1>
-	<label for="birthdate">Podaj swoją datę urodzenia:</label>
-	<input type="date" id="birthdate">
-	<div id="squares-container"></div>
+	<div class="container">
+		<h1>Kwadraty życia</h1>
+		<form>
+			<label for="birthdate">Podaj swoją datę urodzenia:</label>
+			<input type="date" id="birthdate" required>
+			<button type="submit">Oblicz</button>
+		</form>
+		<div id="squares-container"></div>
+	</div>
 	<script src="script.js"></script>
 </body>
 </html>
