@@ -1,25 +1,28 @@
-// Pobieranie daty urodzenia od użytkownika
-const birthdateInput = document.getElementById("birthdate");
-birthdateInput.addEventListener("change", updateSquares);
+const squaresContainer = document.getElementById("squares-container");
 
-function updateSquares() {
-	const birthdate = new Date(birthdateInput.value);
-	const lifespanInWeeks = 100 * 52; // zakładamy, że żyjemy 100 lat, a każdy rok ma 52 tygodnie
-	const livedWeeks = Math.floor((Date.now() - birthdate) / (1000 * 60 * 60 * 24 * 7));
-	const remainingWeeks = lifespanInWeeks - livedWeeks;
+function createSquares(livedWeeks) {
+  squaresContainer.innerHTML = "";
 
-	// Tworzenie kwadratów
-	const squaresContainer = document.getElementById("squares-container");
-	squaresContainer.innerHTML = "";
+  for (let i = 1; i <= 5200; i++) {
+    const square = document.createElement("div");
 
-	for (let i = 0; i < lifespanInWeeks; i++) {
-		const square = document.createElement("div");
-		square.classList.add("square");
-		if (i < livedWeeks) {
-			square.classList.add("lived");
-		} else {
-			square.classList.add("remaining");
-		}
-		squaresContainer.appendChild(square);
-	}
+    if (i <= livedWeeks) {
+      square.classList.add("square", "lived");
+    } else {
+      square.classList.add("square", "remaining");
+    }
+
+    squaresContainer.appendChild(square);
+  }
 }
+
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const birthdate = new Date(event.target.elements.birthdate.value);
+  const currentDate = new Date();
+  const totalWeeks = 5200; // 100 years * 52 weeks per year
+  const livedWeeks = Math.round((currentDate - birthdate) / (7 * 24 * 60 * 60 * 1000));
+
+  createSquares(livedWeeks);
+});
