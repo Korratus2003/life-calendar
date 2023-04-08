@@ -1,24 +1,25 @@
-const dateInput = document.getElementById("date-input");
-const squaresContainer = document.querySelector(".squares-container");
+// Pobieranie daty urodzenia od użytkownika
+const birthdateInput = document.getElementById("birthdate");
+birthdateInput.addEventListener("change", updateSquares);
 
-dateInput.addEventListener("change", () => {
-    const birthDate = new Date(dateInput.value);
-    const now = new Date();
+function updateSquares() {
+	const birthdate = new Date(birthdateInput.value);
+	const lifespanInWeeks = 100 * 52; // zakładamy, że żyjemy 100 lat, a każdy rok ma 52 tygodnie
+	const livedWeeks = Math.floor((Date.now() - birthdate) / (1000 * 60 * 60 * 24 * 7));
+	const remainingWeeks = lifespanInWeeks - livedWeeks;
 
-    const diffInMilliseconds = now.getTime() - birthDate.getTime();
-    const diffInWeeks = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24 * 7));
-    const totalWeeks = Math.floor(100 * 52.143);
+	// Tworzenie kwadratów
+	const squaresContainer = document.getElementById("squares-container");
+	squaresContainer.innerHTML = "";
 
-    dateInput.style.display = "none";
-
-    for (let i = 0; i < totalWeeks; i++) {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        if (i < diffInWeeks) {
-            square.classList.add("filled");
-        } else {
-            square.classList.add("empty");
-        }
-        squaresContainer.appendChild(square);
-    }
-});
+	for (let i = 0; i < lifespanInWeeks; i++) {
+		const square = document.createElement("div");
+		square.classList.add("square");
+		if (i < livedWeeks) {
+			square.classList.add("lived");
+		} else {
+			square.classList.add("remaining");
+		}
+		squaresContainer.appendChild(square);
+	}
+}
