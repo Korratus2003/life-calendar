@@ -20,6 +20,7 @@ h1 {
 
 form {
 	display: inline-block;
+	margin-top: 20px;
 }
 
 form label {
@@ -35,23 +36,10 @@ form input[type="date"] {
 	font-size: 16px;
 }
 
-form button {
-	padding: 5px 10px;
-	border: none;
-	border-radius: 3px;
-	background-color: #4CAF50;
-	color: white;
-	font-size: 16px;
-	cursor: pointer;
-}
-
-form button:hover {
-	background-color: #3e8e41;
-}
-
 #squares-container {
-	margin-top: 20px;
+	margin-top: 40px;
 	font-size: 0;
+	text-align: center;
 }
 
 .square {
@@ -72,6 +60,16 @@ form button:hover {
 	background-color: white;
 }
 
-input[type="date"]:valid {
+#birthdate-form {
+	display: block;
+}
+
+#birthdate:valid + button {
 	display: none;
+}
+
+@media screen and (max-width: 600px) {
+	.container {
+		max-width: 100%;
+	}
 }
